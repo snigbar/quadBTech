@@ -29,7 +29,7 @@ export default function ShowDetails() {
         <div className="flex flex-col md:flex-row gap-4 items-center py-2 p-3 shadow-md rounded-md bg-white w-full mx-auto">
           {/* image section */}
           <img src={imgUrl} className="object-cover w-96 h-full" />
-          <div className="h-full space-y-4 p-2">
+          <div className="h-full space-y-4 p-2 flex flex-col items-center md:items-star">
             {/* heading */}
             <h1 className="text-2xl my-2 font-medium text-slate-900">
               {showData.show.name}
