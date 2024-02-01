@@ -4,6 +4,7 @@ import {
   TBookings,
   TChildren,
   TContextData,
+  TShow,
 } from "../../interfaces/interfaces";
 
 // create context
@@ -14,7 +15,7 @@ export const AppContext = createContext<TContextData>({
 });
 
 export default function AppContextProvider({ children }: TChildren) {
-  const [shows, setShows] = useState<null | Record<string, unknown>[]>(null);
+  const [shows, setShows] = useState<null | TShow[]>(null);
   const [error, setError] = useState<string | null>(null);
   const [bookings, setBookings] = useState<TBookings>({ mybookings: [] });
 

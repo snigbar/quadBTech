@@ -8,8 +8,65 @@ export type TBookings = {
   mybookings: [] | Record<string, unknown>[];
 };
 
+export type TShow = {
+  score: number;
+  show: {
+    id: number;
+    url: string;
+    name: string;
+    type: string;
+    language: string;
+    genres: string[];
+    status: string;
+    runtime: number;
+    averageRuntime: number;
+    premiered: string;
+    ended: string;
+    officialSite: string;
+    schedule: {
+      time: string;
+      days: string[];
+    };
+    rating: {
+      average: number;
+    };
+    weight: number;
+    network: {
+      id: number;
+      name: string;
+      country: {
+        name: string;
+        code: string;
+        timezone: string;
+      };
+      officialSite: null | string;
+    };
+    webChannel: null;
+    dvdCountry: null;
+    externals: {
+      tvrage: null;
+      thetvdb: number;
+      imdb: string;
+    };
+    image: {
+      medium: string;
+      original: string;
+    };
+    summary: string;
+    updated: number;
+    _links: {
+      self: {
+        href: string;
+      };
+      previousepisode: {
+        href: string;
+      };
+    };
+  };
+};
+
 export type TContextData = {
-  data: null | Record<string, unknown>[];
+  data: null | TShow[];
   myBookings: TBookings;
   error: null | string;
   setBookings?: (param: TBookings) => void;
