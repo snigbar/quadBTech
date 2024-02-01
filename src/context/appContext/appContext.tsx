@@ -4,6 +4,7 @@ import {
   TBookings,
   TChildren,
   TContextData,
+  TFormData,
   TShow,
 } from "../../interfaces/interfaces";
 
@@ -12,17 +13,32 @@ export const AppContext = createContext<TContextData>({
   data: null,
   myBookings: { mybookings: [] },
   error: null,
+  showModal: false,
+  setBookings: (data) => {
+    return data;
+  },
 });
 
 export default function AppContextProvider({ children }: TChildren) {
   const [shows, setShows] = useState<null | TShow[]>(null);
   const [error, setError] = useState<string | null>(null);
   const [bookings, setBookings] = useState<TBookings>({ mybookings: [] });
+  const [showModal, setShowModal] = useState(false);
 
   //   for updating bookings
-  const updateBookingData = (newBookings: TBookings) => {
-    setBookings(newBookings);
-    localStorage.setItem("bookings", JSON.stringify(newBookings));
+  const updateBookingData = (newBookings: TFormData) => {
+    let updatedBookings: TFormData[] = [];
+    if (bookings.mybookings.length > 0) {
+      updatedBookings = [newBookings, ...bookings.mybookings];
+    } else {
+      updatedBookings = [newBookings];
+    }
+
+    setBookings({ mybookings: updatedBookings });
+    localStorage.setItem(
+      "bookings",
+      JSON.stringify({ mybookings: updatedBookings })
+    );
   };
 
   //   side effects handling
@@ -43,7 +59,7 @@ export default function AppContextProvider({ children }: TChildren) {
     const getBookingsFromLocalStorage = () => {
       const storedBookings = localStorage.getItem("bookings");
       if (storedBookings) {
-        setBookings(JSON.parse(storedBookings));
+        setBookings({ mybookings: JSON.parse(storedBookings) });
       }
     };
 
@@ -68,6 +84,8 @@ export default function AppContextProvider({ children }: TChildren) {
         myBookings: bookings,
         error: error,
         setBookings: updateBookingData,
+        showModal: showModal,
+        setShowModal: setShowModal,
       }}
     >
       {children}

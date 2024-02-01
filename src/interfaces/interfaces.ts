@@ -1,11 +1,17 @@
-import { ReactNode } from "react";
+import React, { ReactNode } from "react";
 
 export interface TChildren {
   children: ReactNode;
 }
 
+export type TFormData = {
+  name: string;
+  email: string;
+  ShowName: string;
+};
+
 export type TBookings = {
-  mybookings: [] | Record<string, unknown>[];
+  mybookings: TFormData[];
 };
 
 export type TShow = {
@@ -69,5 +75,7 @@ export type TContextData = {
   data: null | TShow[];
   myBookings: TBookings;
   error: null | string;
-  setBookings?: (param: TBookings) => void;
+  setBookings: (param: TFormData) => void;
+  showModal: boolean;
+  setShowModal?: React.Dispatch<React.SetStateAction<boolean>>;
 };
