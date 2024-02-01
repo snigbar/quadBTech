@@ -6,7 +6,7 @@ export default function ShowCards({ tvShow }: { tvShow: TShow }) {
   const imgUrl = show.image?.medium || noImg;
 
   return (
-    <div className="flex gap-4 items-center py-2 p-3 shadow-md rounded-md bg-white w-3/5 mx-auto hover:scale-[1.03] transition-transform">
+    <div className="flex flex-col md:flex-row gap-4 items-center py-2 p-3 shadow-md rounded-md bg-white w-full md:4/5 lg:w-3/5 mx-auto hover:scale-[1.03] transition-transform">
       <img src={imgUrl} className="object-cover w-60 h-80" />
       <div className="h-full space-y-4">
         <h1 className="text-2xl my-2 font-medium text-slate-900">
